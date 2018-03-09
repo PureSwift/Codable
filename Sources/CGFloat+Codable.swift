@@ -4,7 +4,10 @@
 
 
 import Foundation
+
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 import CoreGraphics
+#endif
 
 extension CGFloat : Codable {
     @_transparent

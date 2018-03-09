@@ -11,8 +11,11 @@
 // REQUIRES: objc_interop
 
 import Foundation
-import CoreGraphics
 import XCTest
+
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    import CoreGraphics
+#endif
 
 #if swift(>=3.2)
 // import nothing

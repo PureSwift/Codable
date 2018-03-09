@@ -2,8 +2,9 @@
 //  CoreGraphics+Codable.swift
 //  Codable
 
-
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 import CoreGraphics
+#endif
 
 extension CGPoint : Codable {
     public init(from decoder: Decoder) throws {
