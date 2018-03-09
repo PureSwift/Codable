@@ -1755,7 +1755,11 @@ extension _JSONDecoder {
     fileprivate func unbox(_ value: Any, as type: Bool.Type) throws -> Bool? {
         guard !(value is NSNull) else { return nil }
 
-        if let number = value as? NSNumber {
+        if let number = value as? Bool {
+            
+            return number
+            
+        } else if let number = value as? NSNumber {
             #if swift(>=3.1.1) || os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
             // TODO: Add a flag to coerce non-boolean numbers into Bools?
             if number === kCFBooleanTrue as NSNumber {
@@ -1801,6 +1805,7 @@ extension _JSONDecoder {
     fileprivate func unbox(_ value: Any, as type: Int8.Type) throws -> Int8? {
         guard !(value is NSNull) else { return nil }
 
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         guard let number = value as? NSNumber else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -1809,6 +1814,11 @@ extension _JSONDecoder {
         guard NSNumber(value: int8) == number else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
+        #else
+        guard let int8 = value as? Int8 else {
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
+        }
+        #endif
 
         return int8
     }
@@ -1980,9 +1990,18 @@ extension _JSONDecoder {
     }
 
     fileprivate func unbox(_ value: Any, as type: Double.Type) throws -> Double? {
+        
         guard !(value is NSNull) else { return nil }
-
-        if let number = value as? NSNumber {
+        
+        if let number = value as? Double {
+            
+            return number
+            
+        } else if let int = value as? Int {
+            
+            return Double(int)
+            
+        } else if let number = value as? NSNumber {
             // We are always willing to return the number as a Double:
             // * If the original value was integral, it is guaranteed to fit in a Double; we are willing to lose precision past 2^53 if you encoded a UInt64 but requested a Double
             // * If it was a Float or Double, you will get back the precise value
@@ -2010,7 +2029,7 @@ extension _JSONDecoder {
                 return Double.nan
             }
         }
-
+        
         throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
 
