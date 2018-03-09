@@ -306,43 +306,43 @@ fileprivate struct _JSONKeyedEncodingContainer<K : CodingKey> : KeyedEncodingCon
 
     // MARK: - KeyedEncodingContainerProtocol Methods
 
-    public mutating func encodeNil(forKey key: Key)               throws { self.container[key.stringValue] = NSNull() }
-    public mutating func encode(_ value: Bool, forKey key: Key)   throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: Int, forKey key: Key)    throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: Int8, forKey key: Key)   throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: Int16, forKey key: Key)  throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: Int32, forKey key: Key)  throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: Int64, forKey key: Key)  throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: UInt, forKey key: Key)   throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: UInt8, forKey key: Key)  throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: UInt16, forKey key: Key) throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: UInt32, forKey key: Key) throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: UInt64, forKey key: Key) throws { self.container[key.stringValue] = self.encoder.box(value) }
-    public mutating func encode(_ value: String, forKey key: Key) throws { self.container[key.stringValue] = self.encoder.box(value) }
+    public mutating func encodeNil(forKey key: Key)               throws { self.container[NSString(string: key.stringValue)] = NSNull() }
+    public mutating func encode(_ value: Bool, forKey key: Key)   throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: Int, forKey key: Key)    throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: Int8, forKey key: Key)   throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: Int16, forKey key: Key)  throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: Int32, forKey key: Key)  throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: Int64, forKey key: Key)  throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: UInt, forKey key: Key)   throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: UInt8, forKey key: Key)  throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: UInt16, forKey key: Key) throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: UInt32, forKey key: Key) throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: UInt64, forKey key: Key) throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
+    public mutating func encode(_ value: String, forKey key: Key) throws { self.container[NSString(string: key.stringValue)] = self.encoder.box(value) }
 
     public mutating func encode(_ value: Float, forKey key: Key)  throws {
         // Since the float may be invalid and throw, the coding path needs to contain this key.
         self.encoder.codingPath.append(key)
         defer { self.encoder.codingPath.removeLast() }
-        self.container[key.stringValue] = try self.encoder.box(value)
+        self.container[NSString(string: key.stringValue)] = try self.encoder.box(value)
     }
 
     public mutating func encode(_ value: Double, forKey key: Key) throws {
         // Since the double may be invalid and throw, the coding path needs to contain this key.
         self.encoder.codingPath.append(key)
         defer { self.encoder.codingPath.removeLast() }
-        self.container[key.stringValue] = try self.encoder.box(value)
+        self.container[NSString(string: key.stringValue)] = try self.encoder.box(value)
     }
 
     public mutating func encode<T : Encodable>(_ value: T, forKey key: Key) throws {
         self.encoder.codingPath.append(key)
         defer { self.encoder.codingPath.removeLast() }
-        self.container[key.stringValue] = try self.encoder.box(value)
+        self.container[NSString(string: key.stringValue)] = try self.encoder.box(value)
     }
 
     public mutating func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: Key) -> KeyedEncodingContainer<NestedKey> {
         let dictionary = NSMutableDictionary()
-        self.container[key.stringValue] = dictionary
+        self.container[NSString(string: key.stringValue)] = dictionary
 
         self.codingPath.append(key)
         defer { self.codingPath.removeLast() }
@@ -353,7 +353,7 @@ fileprivate struct _JSONKeyedEncodingContainer<K : CodingKey> : KeyedEncodingCon
 
     public mutating func nestedUnkeyedContainer(forKey key: Key) -> UnkeyedEncodingContainer {
         let array = NSMutableArray()
-        self.container[key.stringValue] = array
+        self.container[NSString(string: key.stringValue)] = array
 
         self.codingPath.append(key)
         defer { self.codingPath.removeLast() }
