@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+
 #if swift(>=3.2)
     // import nothing
 #elseif swift(>=3.0)
@@ -719,7 +721,7 @@ class TestJSONEncoder : TestJSONEncoderSuper {
     let encoder = JSONEncoder()
     do {
       let _ = try encoder.encode(NestedContainersTestType())
-    } catch let error as NSError {
+    } catch {
       expectUnreachable("Caught error during encoding nested container types: \(error)")
     }
   }
@@ -728,7 +730,7 @@ class TestJSONEncoder : TestJSONEncoderSuper {
     let encoder = JSONEncoder()
     do {
       let _ = try encoder.encode(NestedContainersTestType(testSuperEncoder: true))
-    } catch let error as NSError {
+    } catch {
       expectUnreachable("Caught error during encoding nested container types: \(error)")
     }
   }
@@ -1604,3 +1606,5 @@ func expectEqual <T: Equatable> (_ lhs: T, _ rhs: T, _ message: String = "", fil
     
     XCTAssert(lhs == lhs, message, file: file, line: line)
 }
+
+#endif
