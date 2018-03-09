@@ -832,7 +832,10 @@ class TestJSONEncoder : TestJSONEncoderSuper {
     //
     // The issue at hand reproduces when you have a referencing encoder (superEncoder() creates one) that has a container on the stack (unkeyedContainer() adds one) that encodes a value going through box_() (Array does that) that encodes something which throws (Float.infinity does that).
     // When reproducing, this will cause a test failure via fatalError().
+    #if swift(>=3.2)
+    #elseif swift(>=3.0)
     _ = try? JSONEncoder().encode(ReferencingEncoderWrapper([Float.infinity]))
+    #endif
   }
 
   func testEncoderStateThrowOnEncodeCustomDate() {
@@ -856,7 +859,10 @@ class TestJSONEncoder : TestJSONEncoderSuper {
       throw CustomError.foo
     })
 
+    #if swift(>=3.2)
+    #elseif swift(>=3.0)
     _ = try? encoder.encode(ReferencingEncoderWrapper(Date()))
+    #endif
   }
 
   func testEncoderStateThrowOnEncodeCustomData() {
@@ -880,7 +886,10 @@ class TestJSONEncoder : TestJSONEncoderSuper {
       throw CustomError.foo
     })
 
+    #if swift(>=3.2)
+    #elseif swift(>=3.0)
     _ = try? encoder.encode(ReferencingEncoderWrapper(Data()))
+    #endif
   }
 
   // MARK: - Decoder State
