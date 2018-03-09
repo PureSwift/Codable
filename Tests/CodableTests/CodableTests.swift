@@ -121,6 +121,21 @@ struct UUIDCodingWrapper : Codable, Equatable {
 
 // MARK: - Tests
 class TestCodable : TestCodableSuper {
+    
+    static var allTests = [
+        ("test_Calendar_JSON", test_Calendar_JSON),
+        ("test_CharacterSet_JSON", test_CharacterSet_JSON),
+        ("test_DateComponents_JSON", test_DateComponents_JSON),
+        ("test_Decimal_JSON", test_Decimal_JSON),
+        ("test_IndexPath_JSON", test_IndexPath_JSON),
+        ("test_IndexSet_JSON", test_IndexSet_JSON),
+        ("test_Locale_JSON", test_Locale_JSON),
+        ("test_NSRange_JSON", test_NSRange_JSON),
+        ("test_TimeZone_JSON", test_TimeZone_JSON),
+        ("test_URL_JSON", test_URL_JSON),
+        ("test_UUID_JSON", test_UUID_JSON)
+        ]
+    
     // MARK: - AffineTransform
     #if os(OSX)
     // FIXME: Comment the tests back in once rdar://problem/33363218 is in the SDK.
@@ -193,6 +208,8 @@ class TestCodable : TestCodableSuper {
             expectRoundTripEqualityThroughJSON(for: characterSet)
         }
     }
+    
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 
     // MARK: - CGAffineTransform
     lazy var cg_affineTransformValues: [CGAffineTransform] = {
@@ -215,7 +232,7 @@ class TestCodable : TestCodableSuper {
 
         return values
     }()
-
+    
     func test_CGAffineTransform_JSON() {
         for transform in cg_affineTransformValues {
             expectRoundTripEqualityThroughJSON(for: transform)
@@ -311,6 +328,8 @@ class TestCodable : TestCodableSuper {
             expectRoundTripEqualityThroughJSON(for: vector)
         }
     }
+    
+    #endif
 
     // MARK: - DateComponents
     lazy var dateComponents: Set<Calendar.Component> = [
@@ -488,11 +507,13 @@ class TestCodable : TestCodableSuper {
 
 // MARK: - Helper Types
 
+private enum TopLevelWrapperCodingKeys: String, CodingKey {
+    case value
+}
+
 struct TopLevelWrapper<T> : Codable, Equatable where T : Codable, T : Equatable {
 
-    private enum CodingKeys: String, CodingKey {
-        case value
-    }
+    
 
     /// Creates a new instance by decoding from the given decoder.
     ///
@@ -501,12 +522,12 @@ struct TopLevelWrapper<T> : Codable, Equatable where T : Codable, T : Equatable 
     ///
     /// - Parameter decoder: The decoder to read data from.
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: TopLevelWrapperCodingKeys.self)
         value = try container.decode(T.self, forKey: .value)
     }
 
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.container(keyedBy: TopLevelWrapperCodingKeys.self)
         try container.encode(value, forKey: .value)
     }
 
