@@ -3,8 +3,8 @@
 //  Codable
 
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+
 import CoreGraphics
-#endif
 
 extension CGPoint : Codable {
     public init(from decoder: Decoder) throws {
@@ -88,3 +88,6 @@ extension CGAffineTransform : Codable {
         try container.encode(ty)
     }
 }
+    
+#endif
+
