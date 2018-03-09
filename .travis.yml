@@ -30,7 +30,6 @@ script:
   # Run Unit Tests
   - swift test
   # Compile with Xcode
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd Xcode ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild clean test -scheme Codable-macOS ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild clean build -scheme Codable-iOS ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xcodebuild clean build -scheme Codable-watchOS ; fi
