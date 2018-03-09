@@ -12,9 +12,14 @@
 
 import Foundation
 import CoreGraphics
-import Codable
-
 import XCTest
+
+#if swift(>=3.2)
+// import nothing
+#elseif swift(>=3.0)
+import Codable
+#endif
+
 class TestCodableSuper : XCTestCase { }
 
 extension NSRange : Equatable {
