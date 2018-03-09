@@ -1780,6 +1780,7 @@ extension _JSONDecoder {
     fileprivate func unbox(_ value: Any, as type: Int.Type) throws -> Int? {
         guard !(value is NSNull) else { return nil }
 
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         guard let number = value as? NSNumber else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -1788,6 +1789,11 @@ extension _JSONDecoder {
         guard NSNumber(value: int) == number else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number <\(number)> does not fit in \(type)."))
         }
+        #else
+        guard let int = value as? Int else {
+            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
+        }
+        #endif
 
         return int
     }

@@ -120,18 +120,19 @@ struct UUIDCodingWrapper : Codable, Equatable {
 }
 
 // MARK: - Tests
+
 class TestCodable : TestCodableSuper {
     
     static var allTests = [
-        ("test_Calendar_JSON", test_Calendar_JSON),
-        ("test_CharacterSet_JSON", test_CharacterSet_JSON),
-        ("test_DateComponents_JSON", test_DateComponents_JSON),
-        ("test_Decimal_JSON", test_Decimal_JSON),
+        //("test_Calendar_JSON", test_Calendar_JSON),
+        //("test_CharacterSet_JSON", test_CharacterSet_JSON),
+        //("test_DateComponents_JSON", test_DateComponents_JSON),
+        //("test_Decimal_JSON", test_Decimal_JSON),
+        //("test_TimeZone_JSON", test_TimeZone_JSON),
         ("test_IndexPath_JSON", test_IndexPath_JSON),
         ("test_IndexSet_JSON", test_IndexSet_JSON),
         ("test_Locale_JSON", test_Locale_JSON),
         ("test_NSRange_JSON", test_NSRange_JSON),
-        ("test_TimeZone_JSON", test_TimeZone_JSON),
         ("test_URL_JSON", test_URL_JSON),
         ("test_UUID_JSON", test_UUID_JSON)
         ]
