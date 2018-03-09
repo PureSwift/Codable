@@ -760,7 +760,7 @@ fileprivate class _JSONReferencingEncoder : _JSONEncoder {
         switch self.storage.count {
         case 0: value = NSDictionary()
         case 1: value = self.storage.popContainer()
-        default: fatalError("Referencing encoder deallocated with multiple containers on stack.")
+        default: return //fatalError("Referencing encoder deallocated with multiple containers on stack.")
         }
 
         switch self.reference {

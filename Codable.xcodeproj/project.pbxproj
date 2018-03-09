@@ -84,6 +84,9 @@
 		6E0F4A37205226090034440D /* UUID+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F49E9205226090034440D /* UUID+Codable.swift */; };
 		6E0F4A38205226090034440D /* UUID+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F49E9205226090034440D /* UUID+Codable.swift */; };
 		6E0F4A39205226090034440D /* UUID+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F49E9205226090034440D /* UUID+Codable.swift */; };
+		6E420FBC20524DBD005460C3 /* TestJSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E420FBB20524DBC005460C3 /* TestJSONEncoder.swift */; };
+		6E420FBD20524DBD005460C3 /* TestJSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E420FBB20524DBC005460C3 /* TestJSONEncoder.swift */; };
+		6E420FBE20524DBD005460C3 /* TestJSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E420FBB20524DBC005460C3 /* TestJSONEncoder.swift */; };
 		8933C7851EB5B820000D00A4 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Codable.swift */; };
 		8933C7861EB5B820000D00A4 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Codable.swift */; };
 		8933C7871EB5B820000D00A4 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Codable.swift */; };
@@ -144,6 +147,7 @@
 		6E0F49E7205226090034440D /* TimeZone+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeZone+Codable.swift"; sourceTree = "<group>"; };
 		6E0F49E8205226090034440D /* URL+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Codable.swift"; sourceTree = "<group>"; };
 		6E0F49E9205226090034440D /* UUID+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UUID+Codable.swift"; sourceTree = "<group>"; };
+		6E420FBB20524DBC005460C3 /* TestJSONEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestJSONEncoder.swift; sourceTree = "<group>"; };
 		8933C7841EB5B820000D00A4 /* Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* CodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Codable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Codable.plist; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				8933C7891EB5B82A000D00A4 /* CodableTests.swift */,
+				6E420FBB20524DBC005460C3 /* TestJSONEncoder.swift */,
 			);
 			name = Tests;
 			path = Tests/CodableTests;
@@ -600,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E420FBC20524DBD005460C3 /* TestJSONEncoder.swift in Sources */,
 				8933C7901EB5B82D000D00A4 /* CodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,6 +695,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E420FBD20524DBD005460C3 /* TestJSONEncoder.swift in Sources */,
 				8933C78F1EB5B82C000D00A4 /* CodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,6 +704,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E420FBE20524DBD005460C3 /* TestJSONEncoder.swift in Sources */,
 				8933C78E1EB5B82C000D00A4 /* CodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
