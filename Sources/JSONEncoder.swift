@@ -616,7 +616,7 @@ extension _JSONEncoder {
 
         case .iso8601:
             if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
-                #if swift(>=3.1.1)
+                #if swift(>=3.1.1) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
                 return NSString(string: _iso8601Formatter.string(from: date))
                 #else
                 fatalError("ISO8601DateFormatter is unavailable on this platform.")
@@ -678,7 +678,7 @@ extension _JSONEncoder {
             return self.box((value as! URL).absoluteString)
         } else if T.self == Decimal.self {
             // JSONSerialization can natively handle NSDecimalNumber.
-            #if swift(>=3.1.1) || os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+            #if swift(>=3.1.1) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
             return (value as! Decimal) as NSDecimalNumber
             #else
             fatalError("\(NSDecimalNumber.self) not supported")
@@ -1760,7 +1760,7 @@ extension _JSONDecoder {
             return number
             
         } else if let number = value as? NSNumber {
-            #if swift(>=3.1.1) || os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+            #if swift(>=3.1.1) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
             // TODO: Add a flag to coerce non-boolean numbers into Bools?
             if number === kCFBooleanTrue as NSNumber {
                 return true
@@ -2063,7 +2063,7 @@ extension _JSONDecoder {
 
         case .iso8601:
             if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
-                #if swift(>=3.1.1)
+                #if swift(>=3.1.1) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
                 let string = try self.unbox(value, as: String.self)!
                 guard let date = _iso8601Formatter.date(from: string) else {
                     throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
@@ -2197,7 +2197,7 @@ fileprivate struct _JSONKey : CodingKey {
 //===----------------------------------------------------------------------===//
 
 // NOTE: This value is implicitly lazy and _must_ be lazy. We're compiled against the latest SDK (w/ ISO8601DateFormatter), but linked against whichever Foundation the user has. ISO8601DateFormatter might not exist, so we better not hit this code path on an older OS.
-#if swift(>=3.1.1)
+#if swift(>=3.1.1) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
 @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
     let formatter = ISO8601DateFormatter()
