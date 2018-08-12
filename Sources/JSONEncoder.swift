@@ -678,7 +678,7 @@ extension _JSONEncoder {
             return self.box((value as! URL).absoluteString)
         } else if T.self == Decimal.self {
             // JSONSerialization can natively handle NSDecimalNumber.
-            #if swift(>=3.1.1) && (os(macOS) || os(iOS) || os(watchOS) || os(tvOS))
+            #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
             return (value as! Decimal) as NSDecimalNumber
             #else
             fatalError("\(NSDecimalNumber.self) not supported")
