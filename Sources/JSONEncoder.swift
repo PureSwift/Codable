@@ -1945,8 +1945,9 @@ extension _JSONDecoder {
 
     fileprivate func unbox(_ value: Any, as type: Float.Type) throws -> Float? {
         guard !(value is NSNull) else { return nil }
-
+        
         if let number = value as? NSNumber {
+            
             // We are willing to return a Float by losing precision:
             // * If the original value was integral,
             //   * and the integral value was > Float.greatestFiniteMagnitude, we will fail
@@ -1974,7 +1975,15 @@ extension _JSONDecoder {
 
              overflow = true
              */
-
+            
+        } else if let double = value as? Double {
+            
+            guard abs(double) <= Double(Float.greatestFiniteMagnitude) else {
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed JSON number \(double) does not fit in \(type)."))
+            }
+            
+            return Float(double)
+            
         } else if let string = value as? String,
             case .convertFromString(let posInfString, let negInfString, let nanString) = self.options.nonConformingFloatDecodingStrategy {
             if string == posInfString {
